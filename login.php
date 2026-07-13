@@ -28,6 +28,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['nama'] = $user['nama'];
             $_SESSION['email'] = $email;
 
+            if (isset($_POST['remember'])) {
+                $token = bin2hex(random_bytes(32));
+                $token_hash = hash('sha256', $token);
+                $expires_at = date('Y-m-d H:i:s', strtotime('+5 years'));
+
+                mysqli_query($koneksi, "DELETE FROM remember_tokens WHERE id_user = $user[id]");
+                $stmt = mysqli_prepare($koneksi, "INSERT INTO remember_tokens (id_user, token_hash, expires_at) VALUES (?, ?, ?)");
+                mysqli_stmt_bind_param($stmt, 'iss', $user['id'], $token_hash, $expires_at);
+                mysqli_stmt_execute($stmt);
+                mysqli_stmt_close($stmt);
+
+                setcookie('remember_token', $token, time() + 157680000, '/', '', true, true);
+            }
+
             header('Location: resep/index.php');
             exit;
         } else {
@@ -69,10 +83,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                            class="w-full px-3 py-2.5 bg-white border border-[#D1C4B0] text-[13px] text-[#2C2620] focus:outline-none focus:border-[#A3492D] focus:shadow-[0_0_0_2px_rgba(163,73,45,0.1)] transition-all">
                 </div>
 
-                <div class="mb-8">
+                <div class="mb-5">
                     <label for="password" class="text-[12px] tracking-[0.15em] uppercase text-[#6B6154] block mb-2">Kata Sandi</label>
                     <input type="password" id="password" name="password" required
                            class="w-full px-3 py-2.5 bg-white border border-[#D1C4B0] text-[13px] text-[#2C2620] focus:outline-none focus:border-[#A3492D] focus:shadow-[0_0_0_2px_rgba(163,73,45,0.1)] transition-all">
+                </div>
+
+                <div class="mb-8">
+                    <label class="flex items-center gap-2 cursor-pointer">
+                        <input type="checkbox" name="remember" class="w-4 h-4 border border-[#D1C4B0] text-[#A3492D] focus:ring-[#A3492D]">
+                        <span class="text-[13px] text-[#4A4438]">Ingat Saya</span>
+                    </label>
                 </div>
 
                 <button type="submit"
