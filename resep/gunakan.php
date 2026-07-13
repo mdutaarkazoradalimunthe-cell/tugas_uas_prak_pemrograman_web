@@ -28,10 +28,10 @@ if (!$resep_sumber) {
 $kategori_result = mysqli_query($koneksi, "SELECT id, nama_kategori FROM kategori_resep ORDER BY nama_kategori ASC");
 $kategori_list = mysqli_fetch_all($kategori_result, MYSQLI_ASSOC);
 
-$bahan_result = mysqli_query($koneksi, "SELECT id, nama_bahan, kalori_per_100g, protein_per_100g, karbohidrat_per_100g, lemak_per_100g FROM bahan_makanan ORDER BY nama_bahan ASC");
+$bahan_result = mysqli_query($koneksi, "SELECT id, nama_bahan, ROUND((protein_per_100g * 4) + (karbohidrat_per_100g * 4) + (lemak_per_100g * 9), 2) AS kalori_per_100g, protein_per_100g, karbohidrat_per_100g, lemak_per_100g FROM bahan_makanan ORDER BY nama_bahan ASC");
 $bahan_list = mysqli_fetch_all($bahan_result, MYSQLI_ASSOC);
 
-$stmt = mysqli_prepare($koneksi, "SELECT rb.id, rb.id_bahan, rb.jumlah_gram, bm.nama_bahan, bm.kalori_per_100g, bm.protein_per_100g, bm.karbohidrat_per_100g, bm.lemak_per_100g FROM resep_bahan rb JOIN bahan_makanan bm ON rb.id_bahan = bm.id WHERE rb.id_resep = ? ORDER BY bm.nama_bahan ASC");
+$stmt = mysqli_prepare($koneksi, "SELECT rb.id, rb.id_bahan, rb.jumlah_gram, bm.nama_bahan, ROUND((bm.protein_per_100g * 4) + (bm.karbohidrat_per_100g * 4) + (bm.lemak_per_100g * 9), 2) AS kalori_per_100g, bm.protein_per_100g, bm.karbohidrat_per_100g, bm.lemak_per_100g FROM resep_bahan rb JOIN bahan_makanan bm ON rb.id_bahan = bm.id WHERE rb.id_resep = ? ORDER BY bm.nama_bahan ASC");
 mysqli_stmt_bind_param($stmt, 'i', $sumber_id);
 mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);

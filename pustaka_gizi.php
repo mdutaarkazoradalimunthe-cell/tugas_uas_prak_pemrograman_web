@@ -28,7 +28,7 @@ if (isset($_GET['json']) && $_GET['json'] == 1) {
         $exact_param = $keyword;
         $starts_with_param = $keyword . '%';
         $data_stmt = mysqli_prepare($koneksi, "
-            SELECT nama_bahan, kalori_per_100g, protein_per_100g, karbohidrat_per_100g, lemak_per_100g
+            SELECT nama_bahan, ROUND((protein_per_100g * 4) + (karbohidrat_per_100g * 4) + (lemak_per_100g * 9), 2) AS kalori_per_100g, protein_per_100g, karbohidrat_per_100g, lemak_per_100g
             FROM bahan_makanan WHERE nama_bahan LIKE ?
             ORDER BY
                 CASE
@@ -42,7 +42,7 @@ if (isset($_GET['json']) && $_GET['json'] == 1) {
         mysqli_stmt_bind_param($data_stmt, 'sssii', $search_param, $exact_param, $starts_with_param, $limit, $offset);
     } else {
         $data_stmt = mysqli_prepare($koneksi, "
-            SELECT nama_bahan, kalori_per_100g, protein_per_100g, karbohidrat_per_100g, lemak_per_100g
+            SELECT nama_bahan, ROUND((protein_per_100g * 4) + (karbohidrat_per_100g * 4) + (lemak_per_100g * 9), 2) AS kalori_per_100g, protein_per_100g, karbohidrat_per_100g, lemak_per_100g
             FROM bahan_makanan
             ORDER BY nama_bahan ASC LIMIT ? OFFSET ?
         ");
@@ -103,7 +103,7 @@ if (!empty($keyword)) {
     $exact_param = $keyword;
     $starts_with_param = $keyword . '%';
     $data_stmt = mysqli_prepare($koneksi, "
-        SELECT nama_bahan, kalori_per_100g, protein_per_100g, karbohidrat_per_100g, lemak_per_100g
+        SELECT nama_bahan, ROUND((protein_per_100g * 4) + (karbohidrat_per_100g * 4) + (lemak_per_100g * 9), 2) AS kalori_per_100g, protein_per_100g, karbohidrat_per_100g, lemak_per_100g
         FROM bahan_makanan WHERE nama_bahan LIKE ?
         ORDER BY
             CASE
@@ -117,7 +117,7 @@ if (!empty($keyword)) {
     mysqli_stmt_bind_param($data_stmt, 'sssii', $search_param, $exact_param, $starts_with_param, $limit, $offset);
 } else {
     $data_stmt = mysqli_prepare($koneksi, "
-        SELECT nama_bahan, kalori_per_100g, protein_per_100g, karbohidrat_per_100g, lemak_per_100g
+        SELECT nama_bahan, ROUND((protein_per_100g * 4) + (karbohidrat_per_100g * 4) + (lemak_per_100g * 9), 2) AS kalori_per_100g, protein_per_100g, karbohidrat_per_100g, lemak_per_100g
         FROM bahan_makanan
         ORDER BY nama_bahan ASC LIMIT ? OFFSET ?
     ");
