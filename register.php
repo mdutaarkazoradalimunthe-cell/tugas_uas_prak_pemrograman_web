@@ -56,11 +56,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body class="bg-[#FAF7F2] text-[#2C2620] font-sans antialiased min-h-screen">
 
 <div class="flex min-h-screen">
-    <div class="w-full md:w-1/2 flex items-center justify-center px-8 py-12">
+    <div class="w-full md:w-1/2 flex items-center justify-center px-6 py-8 md:px-8 md:py-12">
         <div class="w-full max-w-sm">
-            <a href="landing.php" class="block mb-10"><img src="assets/images/logo.png" alt="Rasa dan Gizi" class="h-16 w-auto"></a>
+            <a href="landing.php" class="block mb-8 md:mb-10"><img src="assets/images/logo.png" alt="Rasa dan Gizi" class="h-12 sm:h-16 w-auto"></a>
 
-            <h1 class="font-serif text-3xl text-[#2C2620] font-normal mb-8">Daftar</h1>
+            <h1 class="font-serif text-2xl sm:text-3xl text-[#2C2620] font-normal mb-6 md:mb-8">Daftar</h1>
 
             <?php if ($error): ?>
                 <div class="border border-[#A3492D] bg-[#FAF7F2] text-[#A3492D] text-[13px] px-4 py-3 mb-6"><?= htmlspecialchars($error) ?></div>

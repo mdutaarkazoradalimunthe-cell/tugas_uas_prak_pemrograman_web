@@ -142,13 +142,13 @@ mysqli_stmt_close($data_stmt);
 <?php $base_path = ''; $active_page = 'pustaka_gizi'; require __DIR__ . '/partials/navbar.php'; ?>
 
 <div class="max-w-6xl mx-auto px-6 py-8">
-    <div class="flex items-start gap-6 mb-8">
+    <div class="flex items-start gap-4 md:gap-6 mb-6 md:mb-8">
         <div class="flex-1">
-            <span class="text-[#A3492D] text-[12px] tracking-[0.15em] uppercase block mb-1">Database</span>
-            <h1 class="font-serif text-3xl text-[#2C2620] font-normal mb-2">Pustaka Gizi</h1>
-            <p class="text-[14px] text-[#4A4438]">Database referensi <span id="totalCount"><?= number_format($total_data) ?></span> bahan makanan beserta informasi gizi per 100 gram.</p>
+            <span class="text-[#A3492D] text-[11px] md:text-[12px] tracking-[0.15em] uppercase block mb-1">Database</span>
+            <h1 class="font-serif text-2xl sm:text-3xl text-[#2C2620] font-normal mb-2">Pustaka Gizi</h1>
+            <p class="text-[13px] md:text-[14px] text-[#4A4438]">Database referensi <span id="totalCount"><?= number_format($total_data) ?></span> bahan makanan beserta informasi gizi per 100 gram.</p>
         </div>
-        <div class="hidden md:block w-28 h-28 shrink-0">
+        <div class="hidden md:block w-20 h-20 md:w-28 md:h-28 shrink-0">
             <img src="assets/images/pustaka.jpg" alt="" class="w-full h-full object-cover">
         </div>
     </div>
@@ -190,7 +190,7 @@ mysqli_stmt_close($data_stmt);
         <?php else: ?>
             <div class="bg-white overflow-hidden shadow-[0_6px_20px_rgba(0,0,0,0.14)] rounded-[2px]">
                 <div class="overflow-x-auto">
-                    <table class="w-full text-[13px]" id="bahanTable">
+                    <table class="w-full text-[13px] min-w-[600px]" id="bahanTable">
                         <thead>
                             <tr class="border-b border-[#DFD5C4] text-[12px] tracking-[0.15em] uppercase text-[#6B6154]">
                                 <th class="text-left py-3 px-4 w-12 font-normal">No</th>
@@ -219,19 +219,19 @@ mysqli_stmt_close($data_stmt);
             </div>
 
             <?php if ($total_pages > 1): ?>
-            <div class="flex justify-center items-center gap-2 mt-6 text-[13px]" id="paginationArea">
+            <div class="flex flex-wrap justify-center items-center gap-1 md:gap-2 mt-6 text-[11px] md:text-[13px]" id="paginationArea">
                 <?php if ($page > 1): ?>
                     <a href="?cari=<?= urlencode($keyword) ?>&halaman=<?= $page - 1 ?>" data-page="<?= $page - 1 ?>"
-                       class="page-link px-3 py-1.5 border border-[#D1C4B0] bg-white text-[#6B6154] hover:bg-[#F5F0E8] transition-all no-underline shadow-[0_2px_5px_rgba(0,0,0,0.08)]">â† Prev</a>
+                       class="page-link px-2 py-1 md:px-3 md:py-1.5 border border-[#D1C4B0] bg-white text-[#6B6154] hover:bg-[#F5F0E8] transition-all no-underline shadow-[0_2px_5px_rgba(0,0,0,0.08)]">← Prev</a>
                 <?php else: ?>
-                    <span class="px-3 py-1.5 border border-[#D1C4B0] bg-white text-[#6B6154] cursor-not-allowed shadow-[0_2px_5px_rgba(0,0,0,0.08)]">â† Prev</span>
+                    <span class="px-2 py-1 md:px-3 md:py-1.5 border border-[#D1C4B0] bg-white text-[#6B6154] cursor-not-allowed shadow-[0_2px_5px_rgba(0,0,0,0.08)]">← Prev</span>
                 <?php endif; ?>
 
                 <?php
                 $start_page = max(1, $page - 2);
                 $end_page = min($total_pages, $page + 2);
                 if ($start_page > 1): ?>
-                    <a href="?cari=<?= urlencode($keyword) ?>&halaman=1" data-page="1" class="page-link px-3 py-1.5 border border-[#D1C4B0] bg-white text-[#6B6154] hover:bg-[#F5F0E8] transition-all no-underline shadow-[0_2px_5px_rgba(0,0,0,0.08)]">1</a>
+                    <a href="?cari=<?= urlencode($keyword) ?>&halaman=1" data-page="1" class="page-link px-2 py-1 md:px-3 md:py-1.5 border border-[#D1C4B0] bg-white text-[#6B6154] hover:bg-[#F5F0E8] transition-all no-underline shadow-[0_2px_5px_rgba(0,0,0,0.08)]">1</a>
                     <?php if ($start_page > 2): ?>
                         <span class="px-2 text-[#6B6154]">...</span>
                     <?php endif; ?>
@@ -239,10 +239,10 @@ mysqli_stmt_close($data_stmt);
 
                 <?php for ($i = $start_page; $i <= $end_page; $i++): ?>
                     <?php if ($i == $page): ?>
-                        <span class="px-3 py-1.5 border border-[#A3492D] bg-[#A3492D] text-white"><?= $i ?></span>
+                        <span class="px-2 py-1 md:px-3 md:py-1.5 border border-[#A3492D] bg-[#A3492D] text-white"><?= $i ?></span>
                     <?php else: ?>
                         <a href="?cari=<?= urlencode($keyword) ?>&halaman=<?= $i ?>" data-page="<?= $i ?>"
-                           class="page-link px-3 py-1.5 border border-[#D1C4B0] bg-white text-[#6B6154] hover:bg-[#F5F0E8] transition-all no-underline shadow-[0_2px_5px_rgba(0,0,0,0.08)]"><?= $i ?></a>
+                           class="page-link px-2 py-1 md:px-3 md:py-1.5 border border-[#D1C4B0] bg-white text-[#6B6154] hover:bg-[#F5F0E8] transition-all no-underline shadow-[0_2px_5px_rgba(0,0,0,0.08)]"><?= $i ?></a>
                     <?php endif; ?>
                 <?php endfor; ?>
 
@@ -251,14 +251,14 @@ mysqli_stmt_close($data_stmt);
                         <span class="px-2 text-[#6B6154]">...</span>
                     <?php endif; ?>
                     <a href="?cari=<?= urlencode($keyword) ?>&halaman=<?= $total_pages ?>" data-page="<?= $total_pages ?>"
-                       class="page-link px-3 py-1.5 border border-[#D1C4B0] bg-white text-[#6B6154] hover:bg-[#F5F0E8] transition-all no-underline shadow-[0_2px_5px_rgba(0,0,0,0.08)]"><?= $total_pages ?></a>
+                       class="page-link px-2 py-1 md:px-3 md:py-1.5 border border-[#D1C4B0] bg-white text-[#6B6154] hover:bg-[#F5F0E8] transition-all no-underline shadow-[0_2px_5px_rgba(0,0,0,0.08)]"><?= $total_pages ?></a>
                 <?php endif; ?>
 
                 <?php if ($page < $total_pages): ?>
                     <a href="?cari=<?= urlencode($keyword) ?>&halaman=<?= $page + 1 ?>" data-page="<?= $page + 1 ?>"
-                       class="page-link px-3 py-1.5 border border-[#D1C4B0] bg-white text-[#6B6154] hover:bg-[#F5F0E8] transition-all no-underline shadow-[0_2px_5px_rgba(0,0,0,0.08)]">Next â†’</a>
+                       class="page-link px-2 py-1 md:px-3 md:py-1.5 border border-[#D1C4B0] bg-white text-[#6B6154] hover:bg-[#F5F0E8] transition-all no-underline shadow-[0_2px_5px_rgba(0,0,0,0.08)]">Next &rarr;</a>
                 <?php else: ?>
-                    <span class="px-3 py-1.5 border border-[#D1C4B0] bg-white text-[#6B6154] cursor-not-allowed shadow-[0_2px_5px_rgba(0,0,0,0.08)]">Next â†’</span>
+                    <span class="px-2 py-1 md:px-3 md:py-1.5 border border-[#D1C4B0] bg-white text-[#6B6154] cursor-not-allowed shadow-[0_2px_5px_rgba(0,0,0,0.08)]">Next &rarr;</span>
                 <?php endif; ?>
             </div>
             <?php endif; ?>

@@ -61,13 +61,13 @@ if (!empty($keyword)) {
 <?php $base_path = ''; $active_page = 'rekomendasi'; require __DIR__ . '/partials/navbar.php'; ?>
 
 <div class="max-w-6xl mx-auto px-6 py-8">
-    <div class="flex items-start gap-6 mb-8">
+    <div class="flex items-start gap-4 md:gap-6 mb-6 md:mb-8">
         <div class="flex-1">
-            <span class="text-[#A3492D] text-[12px] tracking-[0.15em] uppercase block mb-1">Rekomendasi</span>
-            <h1 class="font-serif text-3xl text-[#2C2620] font-normal mb-2">Rekomendasi Resep</h1>
-            <p class="text-[14px] text-[#4A4438]">Cari resep dari seluruh pengguna, urutkan dari yang paling rendah kalori.</p>
+            <span class="text-[#A3492D] text-[11px] md:text-[12px] tracking-[0.15em] uppercase block mb-1">Rekomendasi</span>
+            <h1 class="font-serif text-2xl sm:text-3xl text-[#2C2620] font-normal mb-2">Rekomendasi Resep</h1>
+            <p class="text-[13px] md:text-[14px] text-[#4A4438]">Cari resep dari seluruh pengguna, urutkan dari yang paling rendah kalori.</p>
         </div>
-        <div class="hidden md:block w-28 h-28 shrink-0">
+        <div class="hidden md:block w-20 h-20 md:w-28 md:h-28 shrink-0">
             <img src="assets/images/rekomendasi.jpg" alt="" class="w-full h-full object-cover">
         </div>
     </div>
@@ -107,13 +107,13 @@ if (!empty($keyword)) {
                     <div class="bg-white shadow-[0_6px_20px_rgba(0,0,0,0.14)] flex flex-col rounded-[2px]" style="border-top: 2px solid #A3492D;">
                         <div class="p-5 flex-1">
                             <div class="flex justify-between items-start gap-2 mb-2">
-                                <h2 class="font-serif text-xl text-[#2C2620] font-normal"><?= htmlspecialchars($r['judul']) ?></h2>
+                                <h2 class="font-serif text-lg sm:text-xl text-[#2C2620] font-normal"><?= htmlspecialchars($r['judul']) ?></h2>
                                 <?php if ($r['kalori_per_porsi'] <= 100): ?>
-                                    <span class="text-[#A3492D] text-[10px] tracking-[0.1em] uppercase whitespace-nowrap border border-[#A3492D] px-2 py-0.5">Rendah</span>
+                                    <span class="text-[#A3492D] text-[9px] sm:text-[10px] tracking-[0.1em] uppercase whitespace-nowrap border border-[#A3492D] px-1.5 sm:px-2 py-0.5">Rendah</span>
                                 <?php elseif ($r['kalori_per_porsi'] <= 200): ?>
-                                    <span class="text-[#6B6154] text-[10px] tracking-[0.1em] uppercase whitespace-nowrap border border-[#DFD5C4] px-2 py-0.5">Sedang</span>
+                                    <span class="text-[#6B6154] text-[9px] sm:text-[10px] tracking-[0.1em] uppercase whitespace-nowrap border border-[#DFD5C4] px-1.5 sm:px-2 py-0.5">Sedang</span>
                                 <?php else: ?>
-                                    <span class="text-[#6B6154] text-[10px] tracking-[0.1em] uppercase whitespace-nowrap border border-[#DFD5C4] px-2 py-0.5">Tinggi</span>
+                                    <span class="text-[#6B6154] text-[9px] sm:text-[10px] tracking-[0.1em] uppercase whitespace-nowrap border border-[#DFD5C4] px-1.5 sm:px-2 py-0.5">Tinggi</span>
                                 <?php endif; ?>
                             </div>
 

@@ -116,10 +116,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="flex items-start gap-6 mb-8">
         <div class="flex-1">
             <span class="text-[#A3492D] text-[12px] tracking-[0.15em] uppercase block mb-1">Profil</span>
-            <h1 class="font-serif text-3xl text-[#2C2620] font-normal mb-2">Pengaturan Akun</h1>
+            <h1 class="font-serif text-2xl sm:text-3xl text-[#2C2620] font-normal mb-2">Pengaturan Akun</h1>
             <p class="text-[14px] text-[#4A4438]">Kelola data diri dan password kamu.</p>
         </div>
-        <div class="hidden md:block w-28 h-28 shrink-0">
+        <div class="hidden md:block w-20 h-20 md:w-28 md:h-28 shrink-0">
             <img src="assets/images/dashboard.jpg" alt="" class="w-full h-full object-cover">
         </div>
     </div>
@@ -170,13 +170,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                    class="w-full px-3 py-2.5 bg-white border border-[#D1C4B0] text-[13px] text-[#2C2620] focus:outline-none focus:border-[#A3492D] focus:shadow-[0_0_0_2px_rgba(163,73,45,0.1)] transition-all">
         </div>
 
-        <div class="flex gap-3">
+        <div class="flex flex-col sm:flex-row gap-3">
             <button type="submit"
-                    class="py-2.5 px-6 border border-[#A3492D] bg-[#A3492D] text-white text-[13px] tracking-[0.1em] uppercase hover:bg-[#8B3D25] hover:-translate-y-0.5 shadow-[0_6px_14px_rgba(163,73,45,0.35)] hover:shadow-[0_8px_22px_rgba(163,73,45,0.45)] transition-all">
+                    class="w-full sm:w-auto py-2 px-4 sm:py-2.5 sm:px-6 border border-[#A3492D] bg-[#A3492D] text-white text-[12px] sm:text-[13px] tracking-[0.1em] uppercase hover:bg-[#8B3D25] hover:-translate-y-0.5 shadow-[0_6px_14px_rgba(163,73,45,0.35)] hover:shadow-[0_8px_22px_rgba(163,73,45,0.45)] transition-all">
                 Simpan Perubahan
             </button>
             <a href="logout.php"
-               class="py-2.5 px-6 border border-[#D1C4B0] bg-white text-[13px] tracking-[0.1em] uppercase text-[#A3492D] hover:bg-[#F5F0E8] hover:-translate-y-0.5 shadow-[0_4px_10px_rgba(0,0,0,0.14)] hover:shadow-[0_7px_16px_rgba(0,0,0,0.2)] transition-all no-underline">
+               class="w-full sm:w-auto text-center py-2 px-4 sm:py-2.5 sm:px-6 border border-[#D1C4B0] bg-white text-[12px] sm:text-[13px] tracking-[0.1em] uppercase text-[#A3492D] hover:bg-[#F5F0E8] hover:-translate-y-0.5 shadow-[0_4px_10px_rgba(0,0,0,0.14)] hover:shadow-[0_7px_16px_rgba(0,0,0,0.2)] transition-all no-underline">
                 Keluar
             </a>
         </div>

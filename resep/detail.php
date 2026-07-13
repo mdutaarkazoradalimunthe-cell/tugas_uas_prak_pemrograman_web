@@ -70,18 +70,18 @@ if ($resep) {
 <?php $base_path = '../'; $active_page = 'resep'; require __DIR__ . '/../partials/navbar.php'; ?>
 
 <div class="max-w-4xl mx-auto px-6 py-8">
-    <div class="flex items-start gap-6 mb-8">
+    <div class="flex items-start gap-4 md:gap-6 mb-6 md:mb-8">
         <div class="flex-1">
-            <span class="text-[#A3492D] text-[12px] tracking-[0.15em] uppercase block mb-1">
+            <span class="text-[#A3492D] text-[11px] md:text-[12px] tracking-[0.15em] uppercase block mb-1">
                 <?= htmlspecialchars($resep['nama_kategori'] ?? 'Resep') ?>
             </span>
-            <h1 class="font-serif text-3xl text-[#2C2620] font-normal mb-2"><?= htmlspecialchars($resep['judul']) ?></h1>
-            <p class="text-[14px] text-[#4A4438]"><?= $resep['jumlah_porsi'] ?> porsi &middot; Dibuat <?= date('d/m/Y H:i', strtotime($resep['created_at'])) ?></p>
+            <h1 class="font-serif text-2xl sm:text-3xl text-[#2C2620] font-normal mb-2"><?= htmlspecialchars($resep['judul']) ?></h1>
+            <p class="text-[13px] md:text-[14px] text-[#4A4438]"><?= $resep['jumlah_porsi'] ?> porsi &middot; Dibuat <?= date('d/m/Y H:i', strtotime($resep['created_at'])) ?></p>
             <?php if ($resep['deskripsi']): ?>
-                <p class="text-[14px] text-[#4A4438] mt-3 leading-relaxed"><?= nl2br(htmlspecialchars($resep['deskripsi'])) ?></p>
+                <p class="text-[13px] md:text-[14px] text-[#4A4438] mt-3 leading-relaxed"><?= nl2br(htmlspecialchars($resep['deskripsi'])) ?></p>
             <?php endif; ?>
         </div>
-        <div class="hidden md:block w-32 h-32 shrink-0">
+        <div class="hidden md:block w-24 h-24 md:w-32 md:h-32 shrink-0">
             <img src="../assets/images/detail.jpg" alt="" class="w-full h-full object-cover">
         </div>
     </div>
@@ -113,7 +113,7 @@ if ($resep) {
     <div class="bg-white p-6 mb-8 shadow-[0_6px_20px_rgba(0,0,0,0.14)] rounded-[2px]">
         <span class="text-[#A3492D] text-[12px] tracking-[0.15em] uppercase block mb-4">Bahan-Bahan</span>
         <div class="overflow-x-auto">
-            <table class="w-full text-[13px]">
+            <table class="w-full text-[13px] min-w-[500px]">
                 <thead>
                     <tr class="border-b border-[#DFD5C4] text-[12px] tracking-[0.15em] uppercase text-[#6B6154]">
                         <th class="text-left py-2.5 pr-4 font-normal">Bahan</th>
@@ -159,30 +159,30 @@ if ($resep) {
         <div class="text-[14px] text-[#4A4438] leading-relaxed whitespace-pre-line"><?= nl2br(htmlspecialchars($resep['langkah_memasak'])) ?></div>
     </div>
 
-    <div class="flex gap-3 flex-wrap">
+    <div class="flex gap-2 md:gap-3 flex-wrap">
         <?php if ($resep['id_user'] == $_SESSION['id_user']): ?>
-            <a href="edit.php?id=<?= $resep['id'] ?>" class="py-2.5 px-5 border border-[#A3492D] bg-[#A3492D] text-white text-[13px] tracking-[0.1em] uppercase hover:bg-[#8B3D25] hover:-translate-y-0.5 shadow-[0_6px_14px_rgba(163,73,45,0.35)] hover:shadow-[0_8px_22px_rgba(163,73,45,0.45)] transition-all no-underline">Edit Resep</a>
-            <a href="hapus.php?id=<?= $resep['id'] ?>" class="py-2.5 px-5 border border-[#D1C4B0] bg-white text-[13px] tracking-[0.1em] uppercase text-[#4A4438] hover:bg-[#F5F0E8] hover:-translate-y-0.5 shadow-[0_4px_10px_rgba(0,0,0,0.14)] hover:shadow-[0_7px_16px_rgba(0,0,0,0.2)] transition-all no-underline" onclick="confirmHapus(event, this)">Hapus Resep</a>
+            <a href="edit.php?id=<?= $resep['id'] ?>" class="py-2 px-4 sm:py-2.5 sm:px-5 border border-[#A3492D] bg-[#A3492D] text-white text-[12px] sm:text-[13px] tracking-[0.1em] uppercase hover:bg-[#8B3D25] hover:-translate-y-0.5 shadow-[0_6px_14px_rgba(163,73,45,0.35)] hover:shadow-[0_8px_22px_rgba(163,73,45,0.45)] transition-all no-underline">Edit Resep</a>
+            <a href="hapus.php?id=<?= $resep['id'] ?>" class="py-2 px-4 sm:py-2.5 sm:px-5 border border-[#D1C4B0] bg-white text-[12px] sm:text-[13px] tracking-[0.1em] uppercase text-[#4A4438] hover:bg-[#F5F0E8] hover:-translate-y-0.5 shadow-[0_4px_10px_rgba(0,0,0,0.14)] hover:shadow-[0_7px_16px_rgba(0,0,0,0.2)] transition-all no-underline" onclick="confirmHapus(event, this)">Hapus Resep</a>
         <?php else: ?>
             <a href="gunakan.php?sumber=<?= $resep['id'] ?><?= isset($_GET['bahan']) ? '&bahan=' . urlencode($_GET['bahan']) : '' ?>"
-               class="py-2.5 px-5 border border-[#A3492D] bg-[#A3492D] text-white text-[13px] tracking-[0.1em] uppercase hover:bg-[#8B3D25] hover:-translate-y-0.5 shadow-[0_6px_14px_rgba(163,73,45,0.35)] hover:shadow-[0_8px_22px_rgba(163,73,45,0.45)] transition-all no-underline">
+               class="py-2 px-4 sm:py-2.5 sm:px-5 border border-[#A3492D] bg-[#A3492D] text-white text-[12px] sm:text-[13px] tracking-[0.1em] uppercase hover:bg-[#8B3D25] hover:-translate-y-0.5 shadow-[0_6px_14px_rgba(163,73,45,0.35)] hover:shadow-[0_8px_22px_rgba(163,73,45,0.45)] transition-all no-underline">
                 Gunakan Resep Ini
             </a>
         <?php endif; ?>
-        <a href="index.php" class="py-2.5 px-5 border border-[#D1C4B0] bg-white text-[13px] tracking-[0.1em] uppercase text-[#4A4438] hover:bg-[#F5F0E8] hover:-translate-y-0.5 shadow-[0_4px_10px_rgba(0,0,0,0.14)] hover:shadow-[0_7px_16px_rgba(0,0,0,0.2)] transition-all no-underline">Kembali</a>
+        <a href="index.php" class="py-2 px-4 sm:py-2.5 sm:px-5 border border-[#D1C4B0] bg-white text-[12px] sm:text-[13px] tracking-[0.1em] uppercase text-[#4A4438] hover:bg-[#F5F0E8] hover:-translate-y-0.5 shadow-[0_4px_10px_rgba(0,0,0,0.14)] hover:shadow-[0_7px_16px_rgba(0,0,0,0.2)] transition-all no-underline">Kembali</a>
     </div>
 </div>
 
 <div id="hapusModal" class="fixed inset-0 z-50 hidden">
     <div class="fixed inset-0 bg-black/40"></div>
     <div class="fixed inset-0 flex items-center justify-center p-4">
-        <div class="bg-white shadow-[0_6px_20px_rgba(0,0,0,0.14)] rounded-[2px] max-w-sm w-full" style="border-top: 2px solid #A3492D;">
-            <div class="p-6">
-                <h3 class="font-serif text-xl text-[#2C2620] font-normal mb-2">Hapus Resep</h3>
-                <p class="text-[14px] text-[#4A4438] mb-6">Yakin ingin menghapus resep ini? Tindakan ini tidak dapat dibatalkan.</p>
-                <div class="flex gap-3 justify-end">
-                    <button id="batalHapus" class="py-2 px-4 border border-[#D1C4B0] bg-white text-[13px] tracking-[0.1em] uppercase text-[#4A4438] hover:bg-[#F5F0E8] hover:-translate-y-0.5 shadow-[0_4px_10px_rgba(0,0,0,0.14)] hover:shadow-[0_7px_16px_rgba(0,0,0,0.2)] transition-all">Batal</button>
-                    <a id="konfirmasiHapus" href="#" class="py-2 px-4 border border-[#A3492D] bg-[#A3492D] text-white text-[13px] tracking-[0.1em] uppercase hover:bg-[#8B3D25] hover:-translate-y-0.5 shadow-[0_6px_14px_rgba(163,73,45,0.35)] hover:shadow-[0_8px_22px_rgba(163,73,45,0.45)] transition-all no-underline">Ya, Hapus</a>
+        <div class="bg-white shadow-[0_6px_20px_rgba(0,0,0,0.14)] rounded-[2px] max-w-[90%] sm:max-w-sm w-full" style="border-top: 2px solid #A3492D;">
+            <div class="p-4 md:p-6">
+                <h3 class="font-serif text-lg md:text-xl text-[#2C2620] font-normal mb-2">Hapus Resep</h3>
+                <p class="text-[13px] md:text-[14px] text-[#4A4438] mb-4 md:mb-6">Yakin ingin menghapus resep ini? Tindakan ini tidak dapat dibatalkan.</p>
+                <div class="flex gap-2 md:gap-3 justify-end">
+                    <button id="batalHapus" class="py-1.5 px-3 md:py-2 md:px-4 border border-[#D1C4B0] bg-white text-[12px] md:text-[13px] tracking-[0.1em] uppercase text-[#4A4438] hover:bg-[#F5F0E8] hover:-translate-y-0.5 shadow-[0_4px_10px_rgba(0,0,0,0.14)] hover:shadow-[0_7px_16px_rgba(0,0,0,0.2)] transition-all">Batal</button>
+                    <a id="konfirmasiHapus" href="#" class="py-1.5 px-3 md:py-2 md:px-4 border border-[#A3492D] bg-[#A3492D] text-white text-[12px] md:text-[13px] tracking-[0.1em] uppercase hover:bg-[#8B3D25] hover:-translate-y-0.5 shadow-[0_6px_14px_rgba(163,73,45,0.35)] hover:shadow-[0_8px_22px_rgba(163,73,45,0.45)] transition-all no-underline">Ya, Hapus</a>
                 </div>
             </div>
         </div>
