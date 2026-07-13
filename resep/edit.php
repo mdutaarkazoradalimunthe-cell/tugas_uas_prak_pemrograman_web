@@ -7,7 +7,7 @@ $id_user = $_SESSION['id_user'];
 $error = '';
 $success = '';
 
-$stmt = mysqli_prepare($koneksi, "SELECT * FROM resep WHERE id = ? AND id_user = ?");
+$stmt = mysqli_prepare($koneksi, "SELECT * FROM resep_pribadi WHERE id = ? AND id_user = ?");
 mysqli_stmt_bind_param($stmt, 'ii', $id_resep, $id_user);
 mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
@@ -25,7 +25,7 @@ $kategori_list = mysqli_fetch_all($kategori_result, MYSQLI_ASSOC);
 $bahan_result = mysqli_query($koneksi, "SELECT id, nama_bahan, ROUND((protein_per_100g * 4) + (karbohidrat_per_100g * 4) + (lemak_per_100g * 9), 2) AS kalori_per_100g, protein_per_100g, karbohidrat_per_100g, lemak_per_100g FROM bahan_makanan ORDER BY nama_bahan ASC");
 $bahan_list = mysqli_fetch_all($bahan_result, MYSQLI_ASSOC);
 
-$stmt = mysqli_prepare($koneksi, "SELECT rb.id, rb.id_bahan, rb.jumlah_gram, bm.nama_bahan FROM resep_bahan rb JOIN bahan_makanan bm ON rb.id_bahan = bm.id WHERE rb.id_resep = ? ORDER BY bm.nama_bahan ASC");
+$stmt = mysqli_prepare($koneksi, "SELECT rb.id, rb.id_bahan, rb.jumlah_gram, bm.nama_bahan FROM resep_pribadi_bahan rb JOIN bahan_makanan bm ON rb.id_bahan = bm.id WHERE rb.id_resep_pribadi = ? ORDER BY bm.nama_bahan ASC");
 mysqli_stmt_bind_param($stmt, 'i', $id_resep);
 mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
@@ -50,15 +50,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } elseif (empty($id_bahan) || count($id_bahan) === 0) {
         $error = 'Pilih minimal 1 bahan!';
     } else {
-        $stmt = mysqli_prepare($koneksi, "UPDATE resep SET judul = ?, deskripsi = ?, id_kategori = ?, jumlah_porsi = ?, langkah_memasak = ? WHERE id = ? AND id_user = ?");
+        $stmt = mysqli_prepare($koneksi, "UPDATE resep_pribadi SET judul = ?, deskripsi = ?, id_kategori = ?, jumlah_porsi = ?, langkah_memasak = ? WHERE id = ? AND id_user = ?");
         mysqli_stmt_bind_param($stmt, 'ssiisii', $judul, $deskripsi, $id_kategori, $jumlah_porsi, $langkah_memasak, $id_resep, $id_user);
 
         if (mysqli_stmt_execute($stmt)) {
             mysqli_stmt_close($stmt);
 
-            mysqli_query($koneksi, "DELETE FROM resep_bahan WHERE id_resep = $id_resep");
+            mysqli_query($koneksi, "DELETE FROM resep_pribadi_bahan WHERE id_resep_pribadi = $id_resep");
 
-            $stmt_bahan = mysqli_prepare($koneksi, "INSERT INTO resep_bahan (id_resep, id_bahan, jumlah_gram) VALUES (?, ?, ?)");
+            $stmt_bahan = mysqli_prepare($koneksi, "INSERT INTO resep_pribadi_bahan (id_resep_pribadi, id_bahan, jumlah_gram) VALUES (?, ?, ?)");
             $sukses_bahan = true;
 
             for ($i = 0; $i < count($id_bahan); $i++) {

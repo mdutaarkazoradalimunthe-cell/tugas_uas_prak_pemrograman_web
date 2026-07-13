@@ -15,25 +15,46 @@ if (isset($_GET['bahan']) && $_GET['bahan'] !== '') {
     $bahan_user = array_map('intval', explode(',', $_GET['bahan']));
 }
 
+$id_user = $_SESSION['id_user'];
+$is_private = false;
+
 $stmt = mysqli_prepare($koneksi, "
     SELECT r.*, kr.nama_kategori 
-    FROM resep r
+    FROM resep_pribadi r
     LEFT JOIN kategori_resep kr ON r.id_kategori = kr.id
-    WHERE r.id = ?
+    WHERE r.id = ? AND r.id_user = ?
 ");
-mysqli_stmt_bind_param($stmt, 'i', $id_resep);
+mysqli_stmt_bind_param($stmt, 'ii', $id_resep, $id_user);
 mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
 $resep = mysqli_fetch_assoc($result);
 mysqli_stmt_close($stmt);
 
-if (!$resep) {
-    header('Location: index.php');
-    exit;
-}
+if ($resep) {
+    $is_private = true;
+    $gizi = hitung_gizi_resep_pribadi($id_resep);
+    $bahan = get_bahan_resep_pribadi($id_resep);
+} else {
+    $stmt = mysqli_prepare($koneksi, "
+        SELECT r.*, kr.nama_kategori 
+        FROM resep r
+        LEFT JOIN kategori_resep kr ON r.id_kategori = kr.id
+        WHERE r.id = ?
+    ");
+    mysqli_stmt_bind_param($stmt, 'i', $id_resep);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    $resep = mysqli_fetch_assoc($result);
+    mysqli_stmt_close($stmt);
 
-$gizi = hitung_gizi_resep($id_resep);
-$bahan = get_bahan_resep($id_resep);
+    if (!$resep) {
+        header('Location: index.php');
+        exit;
+    }
+
+    $gizi = hitung_gizi_resep($id_resep);
+    $bahan = get_bahan_resep($id_resep);
+}
 ?>
 <!DOCTYPE html>
 <html lang="id">

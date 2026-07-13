@@ -61,14 +61,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } elseif (empty($id_bahan) || count($id_bahan) === 0) {
         $error = 'Pilih minimal 1 bahan!';
     } else {
-        $stmt = mysqli_prepare($koneksi, "INSERT INTO resep (id_user, id_kategori, judul, deskripsi, langkah_memasak, jumlah_porsi) VALUES (?, ?, ?, ?, ?, ?)");
-        mysqli_stmt_bind_param($stmt, 'iisssi', $id_user, $id_kategori, $judul, $deskripsi, $langkah_memasak, $jumlah_porsi);
+        $stmt = mysqli_prepare($koneksi, "INSERT INTO resep_pribadi (id_user, id_kategori, judul, deskripsi, langkah_memasak, jumlah_porsi, sumber_id) VALUES (?, ?, ?, ?, ?, ?, ?)");
+        mysqli_stmt_bind_param($stmt, 'iisssii', $id_user, $id_kategori, $judul, $deskripsi, $langkah_memasak, $jumlah_porsi, $sumber_id);
 
         if (mysqli_stmt_execute($stmt)) {
             $id_resep_baru = mysqli_insert_id($koneksi);
             mysqli_stmt_close($stmt);
 
-            $stmt_bahan = mysqli_prepare($koneksi, "INSERT INTO resep_bahan (id_resep, id_bahan, jumlah_gram) VALUES (?, ?, ?)");
+            $stmt_bahan = mysqli_prepare($koneksi, "INSERT INTO resep_pribadi_bahan (id_resep_pribadi, id_bahan, jumlah_gram) VALUES (?, ?, ?)");
             $sukses_bahan = true;
 
             for ($i = 0; $i < count($id_bahan); $i++) {
