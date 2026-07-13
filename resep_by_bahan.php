@@ -141,24 +141,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body class="bg-[#FAF7F2] text-[#2C2620] font-sans antialiased min-h-screen">
 
-<nav class="sticky top-0 z-40 border-b border-[#DFD5C4] bg-[#FAF7F2]">
-    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-        <a href="resep/index.php" class="block"><img src="assets/images/logo.png" alt="Rasa dan Gizi" class="h-14 w-auto"></a>
-        <div class="flex items-center gap-6 text-[11px] tracking-[0.15em] uppercase text-[#6B6154]">
-            <a href="resep/index.php" class="text-[#A3492D] no-underline">Resep</a>
-            <a href="rekomendasi.php" class="hover:text-[#2C2620] no-underline">Rekomendasi</a>
-            <a href="resep_by_bahan.php" class="hover:text-[#2C2620] no-underline">Cari Bahan</a>
-            <a href="pustaka_gizi.php" class="hover:text-[#2C2620] no-underline">Pustaka Gizi</a>
-            <div class="relative">
-                <span class="text-[#6B6154] cursor-pointer user-dropdown-trigger">Halo, <?= htmlspecialchars($_SESSION['nama']) ?> <span class="text-[10px] ml-0.5">â–¾</span></span>
-                <div class="user-dropdown-menu absolute right-0 top-full mt-1 w-36 bg-[#FAF7F2] border border-[#D1C4B0] hidden z-50">
-                    <a href="profil.php" class="block px-4 py-2.5 text-[13px] text-[#2C2620] no-underline hover:bg-[#E4DBC8] transition-colors">Profil</a>
-                    <a href="logout.php" class="block px-4 py-2.5 text-[13px] text-[#A3492D] no-underline hover:bg-[#E4DBC8] transition-colors border-t border-[#D1C4B0]">Keluar</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</nav>
+<?php $base_path = ''; $active_page = 'cari_bahan'; require __DIR__ . '/partials/navbar.php'; ?>
 
 <div class="max-w-6xl mx-auto px-6 py-8">
     <div class="flex items-start gap-6 mb-8">
