@@ -163,9 +163,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <form method="POST" action="" class="bg-white p-6 mb-6 shadow-[0_6px_20px_rgba(0,0,0,0.14)] rounded-[2px]">
         <div class="mb-4">
             <label for="filterBahan" class="text-[12px] tracking-[0.15em] uppercase text-[#6B6154] block mb-2">Cari Bahan</label>
-            <input type="search" id="filterBahan" name="keyword_bahan" value="<?= htmlspecialchars($keyword_bahan) ?>"
-                   class="w-full px-3 py-2.5 bg-white border border-[#D1C4B0] text-[13px] text-[#2C2620] focus:outline-none focus:border-[#A3492D] focus:shadow-[0_0_0_2px_rgba(163,73,45,0.1)] transition-all"
-                   placeholder="Ketik nama bahan... (contoh: telur, nasi, ayam)" autocomplete="off">
+            <div class="relative">
+                <input type="search" id="filterBahan" name="keyword_bahan" value="<?= htmlspecialchars($keyword_bahan) ?>"
+                       class="w-full px-3 py-2.5 bg-white border border-[#D1C4B0] text-[13px] text-[#2C2620] focus:outline-none focus:border-[#A3492D] focus:shadow-[0_0_0_2px_rgba(163,73,45,0.1)] transition-all"
+                       placeholder="Ketik nama bahan... (contoh: telur, nasi, ayam)" autocomplete="off">
+                <div id="autocomplete-list"
+                     class="absolute left-0 right-0 top-full mt-1 bg-white border border-[#D1C4B0] shadow-[0_6px_20px_rgba(0,0,0,0.14)] z-50 max-h-60 overflow-y-auto hidden text-[13px]">
+                </div>
+            </div>
             <div id="filterInfo" class="text-[12px] text-[#6B6154] mt-2 hidden"></div>
         </div>
 
@@ -286,7 +291,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </div>
 
 <script>
+var semuaBahan = <?= json_encode(array_map(function($b) {
+    return ['id' => (int)$b['id'], 'nama' => $b['nama_bahan']];
+}, $semua_bahan)) ?>;
+
 var filterInput = document.getElementById('filterBahan');
+var autocompleteList = document.getElementById('autocomplete-list');
 var searchTimeout;
 
 // Trigger filter on page load if keyword from POST exists
@@ -317,7 +327,59 @@ filterInput.addEventListener('input', function() {
         info.classList.add('hidden');
     }
 
+    showAutocomplete(keyword);
     scheduleSearch();
+});
+
+filterInput.addEventListener('blur', function() {
+    setTimeout(hideAutocomplete, 150);
+});
+
+filterInput.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        hideAutocomplete();
+    }
+});
+
+function showAutocomplete(keyword) {
+    if (keyword.length < 1) { hideAutocomplete(); return; }
+    var lowerKeyword = keyword.toLowerCase();
+    var re = new RegExp('(' + lowerKeyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'gi');
+    var matched = [];
+    for (var i = 0; i < semuaBahan.length; i++) {
+        if (semuaBahan[i].nama.toLowerCase().indexOf(lowerKeyword) !== -1) {
+            matched.push(semuaBahan[i]);
+            if (matched.length >= 10) break;
+        }
+    }
+    if (matched.length === 0) { hideAutocomplete(); return; }
+    var html = '';
+    for (var i = 0; i < matched.length; i++) {
+        var highlighted = matched[i].nama.replace(re, '<strong>$1</strong>');
+        html += '<div class="px-3 py-2.5 cursor-pointer hover:bg-[#F5F0E8] transition-colors border-b border-[#DFD5C4] last:border-b-0" data-nama="' + matched[i].nama.replace(/"/g, '&quot;') + '">';
+        html += '<span class="text-[#A3492D] mr-2">&#x1F50D;</span>';
+        html += highlighted;
+        html += '</div>';
+    }
+    autocompleteList.innerHTML = html;
+    autocompleteList.classList.remove('hidden');
+}
+
+function hideAutocomplete() {
+    autocompleteList.classList.add('hidden');
+}
+
+function selectAutocomplete(nama) {
+    filterInput.value = nama;
+    hideAutocomplete();
+    filterInput.dispatchEvent(new Event('input'));
+}
+
+autocompleteList.addEventListener('click', function(e) {
+    var target = e.target.closest('[data-nama]');
+    if (target) {
+        selectAutocomplete(target.getAttribute('data-nama'));
+    }
 });
 
 document.getElementById('selectAll').addEventListener('click', function() {
