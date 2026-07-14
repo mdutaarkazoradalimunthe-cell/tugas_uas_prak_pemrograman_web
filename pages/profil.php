@@ -120,7 +120,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <p class="text-[14px] text-[#4A4438]">Kelola data diri dan password kamu.</p>
         </div>
         <div class="hidden md:block w-20 h-20 md:w-28 md:h-28 shrink-0">
-            <img src="assets/images/dashboard.jpg" alt="" class="w-full h-full object-cover">
+            <img src="../assets/images/dashboard.jpg" alt="" class="w-full h-full object-cover">
         </div>
     </div>
 

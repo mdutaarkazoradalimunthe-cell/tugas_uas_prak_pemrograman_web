@@ -149,7 +149,7 @@ mysqli_stmt_close($data_stmt);
             <p class="text-[13px] md:text-[14px] text-[#4A4438]">Database referensi <span id="totalCount"><?= number_format($total_data) ?></span> bahan makanan beserta informasi gizi per 100 gram.</p>
         </div>
         <div class="hidden md:block w-20 h-20 md:w-28 md:h-28 shrink-0">
-            <img src="assets/images/pustaka.jpg" alt="" class="w-full h-full object-cover">
+            <img src="../assets/images/pustaka.jpg" alt="" class="w-full h-full object-cover">
         </div>
     </div>
 

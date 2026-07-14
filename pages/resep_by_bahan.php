@@ -151,7 +151,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <p class="text-[13px] md:text-[14px] text-[#4A4438]">Pilih bahan yang kamu punya, lalu sistem akan mencari resep yang paling cocok!</p>
         </div>
         <div class="hidden md:block w-20 h-20 md:w-28 md:h-28 shrink-0">
-            <img src="assets/images/cari-bahan.jpg" alt="" class="w-full h-full object-cover">
+            <img src="../assets/images/cari-bahan.jpg" alt="" class="w-full h-full object-cover">
         </div>
     </div>
 

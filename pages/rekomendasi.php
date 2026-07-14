@@ -68,7 +68,7 @@ if (!empty($keyword)) {
             <p class="text-[13px] md:text-[14px] text-[#4A4438]">Cari resep dari seluruh pengguna, urutkan dari yang paling rendah kalori.</p>
         </div>
         <div class="hidden md:block w-20 h-20 md:w-28 md:h-28 shrink-0">
-            <img src="assets/images/rekomendasi.jpg" alt="" class="w-full h-full object-cover">
+            <img src="../assets/images/rekomendasi.jpg" alt="" class="w-full h-full object-cover">
         </div>
     </div>
 
