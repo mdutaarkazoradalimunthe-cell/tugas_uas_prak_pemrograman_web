@@ -74,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body class="bg-[#FAF7F2] text-[#2C2620] font-sans antialiased min-h-screen">
 
-<?php $base_path = '../'; $active_page = 'resep'; require __DIR__ . '/../partials/navbar.php'; ?>
+<?php $base_path = '../'; $active_page = 'resep'; require __DIR__ . '/../includes/partials/navbar.php'; ?>
 
 <div class="max-w-4xl mx-auto px-6 py-8">
     <div class="flex items-start gap-4 md:gap-6 mb-6 md:mb-8">
