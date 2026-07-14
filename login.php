@@ -5,7 +5,7 @@ if (isset($_SESSION['id_user'])) {
     exit;
 }
 
-require 'koneksi.php';
+require 'config/koneksi.php';
 
 $error = '';
 

@@ -1,5 +1,5 @@
 <?php
-require_once 'koneksi.php';
+require_once __DIR__ . '/../config/koneksi.php';
 
 $success = [];
 $errors = [];
@@ -53,7 +53,7 @@ $alias_map = [
     'labu siam' => 'Labu Siam',
     'terong' => 'Terong',
     'jagung manis' => 'Jagung Manis',
-    'nasi putih' => 'Nasi Putih',
+    'nasi putih' => 'Nasi',
     'tempe' => 'Tempe',
     'tahu putih' => 'Tahu Putih',
     'daging ayam' => 'Ayam',
@@ -108,7 +108,7 @@ $alias_map = [
     'selasih' => 'Daun selasih segar',
     'sirsak' => 'Sirsak',
     'makaroni' => 'Makaroni',
-    'mie bihun' => 'Mie Bihun',
+    'mie bihun' => 'Bihun',
     'lobak' => 'Lobak',
     'kentang' => 'Kentang',
     'saus tomat' => 'Saus Tomat',

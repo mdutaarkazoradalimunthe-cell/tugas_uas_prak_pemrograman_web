@@ -1,10 +1,10 @@
 <?php
-require_once 'koneksi.php';
+require_once __DIR__ . '/../config/koneksi.php';
 
 $result = mysqli_query($koneksi, 'SELECT id, nama_bahan FROM bahan_makanan');
 $map = [];
 while ($row = mysqli_fetch_assoc($result)) {
-    $map[mb_strtolower($row['nama_bahan'])] = true;
+    $map[$row['nama_bahan']] = (int)$row['id'];
 }
 
 $content = file_get_contents('seed_250_resep.php');
@@ -15,14 +15,12 @@ sort($names);
 
 $missing = [];
 foreach ($names as $name) {
-    $lower = mb_strtolower($name);
-    if (!isset($map[$lower])) {
+    if (!isset($map[$name])) {
         $missing[] = $name;
     }
 }
-echo 'Total unique b() calls: ' . count($names) . "\n";
-echo 'Missing: ' . count($missing) . "\n";
-echo "---\n";
+echo 'Total unique b() names: ' . count($names) . "\n";
+echo 'Missing (' . count($missing) . '):' . "\n";
 foreach ($missing as $m) {
-    echo "  $m\n";
+    echo "  \"$m\"\n";
 }

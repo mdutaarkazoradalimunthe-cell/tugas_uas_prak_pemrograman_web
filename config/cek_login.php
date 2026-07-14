@@ -5,7 +5,7 @@ if (!isset($_SESSION['id_user']) && isset($_COOKIE['remember_token'])) {
     $token = $_COOKIE['remember_token'];
     $token_hash = hash('sha256', $token);
 
-    require_once 'koneksi.php';
+    require_once __DIR__ . '/koneksi.php';
 
     $stmt = mysqli_prepare($koneksi, "SELECT id_user, expires_at FROM remember_tokens WHERE token_hash = ?");
     mysqli_stmt_bind_param($stmt, 's', $token_hash);
@@ -45,6 +45,6 @@ if (!isset($_SESSION['id_user']) && isset($_COOKIE['remember_token'])) {
 }
 
 if (!isset($_SESSION['id_user'])) {
-    header('Location: login.php');
+    header('Location: ../login.php');
     exit;
 }

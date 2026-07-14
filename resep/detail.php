@@ -1,7 +1,7 @@
 <?php
-require_once '../cek_login.php';
-require_once '../koneksi.php';
-require_once '../fungsi_gizi.php';
+require_once '../config/cek_login.php';
+require_once '../config/koneksi.php';
+require_once '../includes/fungsi_gizi.php';
 
 $id_resep = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 
@@ -161,6 +161,7 @@ if ($resep) {
 
     <div class="flex gap-2 md:gap-3 flex-wrap">
         <?php if ($resep['id_user'] == $_SESSION['id_user']): ?>
+            <a href="cetak_pdf.php?id=<?= $resep['id'] ?>" target="_blank" class="py-2 px-4 sm:py-2.5 sm:px-5 border border-[#6B8F71] bg-[#6B8F71] text-white text-[12px] sm:text-[13px] tracking-[0.1em] uppercase hover:bg-[#5A7A60] hover:-translate-y-0.5 shadow-[0_6px_14px_rgba(107,143,113,0.35)] hover:shadow-[0_8px_22px_rgba(107,143,113,0.45)] transition-all no-underline">Cetak PDF</a>
             <a href="edit.php?id=<?= $resep['id'] ?>" class="py-2 px-4 sm:py-2.5 sm:px-5 border border-[#A3492D] bg-[#A3492D] text-white text-[12px] sm:text-[13px] tracking-[0.1em] uppercase hover:bg-[#8B3D25] hover:-translate-y-0.5 shadow-[0_6px_14px_rgba(163,73,45,0.35)] hover:shadow-[0_8px_22px_rgba(163,73,45,0.45)] transition-all no-underline">Edit Resep</a>
             <a href="hapus.php?id=<?= $resep['id'] ?>" class="py-2 px-4 sm:py-2.5 sm:px-5 border border-[#D1C4B0] bg-white text-[12px] sm:text-[13px] tracking-[0.1em] uppercase text-[#4A4438] hover:bg-[#F5F0E8] hover:-translate-y-0.5 shadow-[0_4px_10px_rgba(0,0,0,0.14)] hover:shadow-[0_7px_16px_rgba(0,0,0,0.2)] transition-all no-underline" onclick="confirmHapus(event, this)">Hapus Resep</a>
         <?php else: ?>

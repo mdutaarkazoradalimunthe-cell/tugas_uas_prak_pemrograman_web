@@ -1,0 +1,14 @@
+{
+    "name": "rasa-dan-gizi/app",
+    "description": "Aplikasi resep dengan informasi gizi",
+    "type": "project",
+    "authors": [
+        {
+            "name": "mdutaarkazoradalimunthe-cell",
+            "email": "mdutaarkazoradalimunthe@gmail.com"
+        }
+    ],
+    "require": {
+        "dompdf/dompdf": "^3.1"
+    }
+}

@@ -8,5 +8,5 @@ if (isset($_SESSION['id_user'])) {
 }
 
 // Kalau belum login, redirect ke halaman landing
-header('Location: landing.php');
+header('Location: pages/landing.php');
 exit;

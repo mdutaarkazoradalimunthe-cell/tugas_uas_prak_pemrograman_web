@@ -2,7 +2,7 @@
 // File sementara: seed data kategori resep
 // Jalankan sekali saja: http://localhost/tugas_uas_prak_pemrograman_web/seed_kategori.php
 
-require 'koneksi.php';
+require __DIR__ . '/../config/koneksi.php';
 
 // Daftar kategori yang akan di-insert
 $kategori = [

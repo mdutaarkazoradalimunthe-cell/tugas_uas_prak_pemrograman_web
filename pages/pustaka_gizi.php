@@ -1,6 +1,6 @@
 <?php
-require_once 'cek_login.php';
-require_once 'koneksi.php';
+require_once '../config/cek_login.php';
+require_once '../config/koneksi.php';
 
 if (isset($_GET['json']) && $_GET['json'] == 1) {
     header('Content-Type: application/json; charset=utf-8');
@@ -139,7 +139,7 @@ mysqli_stmt_close($data_stmt);
 </head>
 <body class="bg-[#FAF7F2] text-[#2C2620] font-sans antialiased min-h-screen">
 
-<?php $base_path = ''; $active_page = 'pustaka_gizi'; require __DIR__ . '/partials/navbar.php'; ?>
+<?php $base_path = '../'; $active_page = 'pustaka_gizi'; require __DIR__ . '/../includes/partials/navbar.php'; ?>
 
 <div class="max-w-6xl mx-auto px-6 py-8">
     <div class="flex items-start gap-4 md:gap-6 mb-6 md:mb-8">

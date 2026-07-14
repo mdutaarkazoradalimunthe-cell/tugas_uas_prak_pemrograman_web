@@ -1,6 +1,6 @@
 <?php
 // File berisi fungsi-fungsi untuk kalkulasi gizi
-require_once 'koneksi.php';
+require_once __DIR__ . '/../config/koneksi.php';
 
 /**
  * Hitung total gizi untuk suatu resep

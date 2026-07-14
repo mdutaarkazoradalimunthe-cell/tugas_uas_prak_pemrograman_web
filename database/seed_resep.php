@@ -1,5 +1,5 @@
 <?php
-require_once 'koneksi.php';
+require_once __DIR__ . '/../config/koneksi.php';
 
 $success = [];
 $errors = [];

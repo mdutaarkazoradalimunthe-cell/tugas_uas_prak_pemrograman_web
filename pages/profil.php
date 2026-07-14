@@ -1,6 +1,6 @@
 <?php
-require_once 'cek_login.php';
-require_once 'koneksi.php';
+require_once '../config/cek_login.php';
+require_once '../config/koneksi.php';
 
 $success = '';
 $error = '';
@@ -110,7 +110,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body class="bg-[#FAF7F2] text-[#2C2620] font-sans antialiased min-h-screen">
 
-<?php $base_path = ''; $active_page = ''; require __DIR__ . '/partials/navbar.php'; ?>
+<?php $base_path = '../'; $active_page = ''; require __DIR__ . '/../includes/partials/navbar.php'; ?>
 
 <div class="max-w-4xl mx-auto px-6 py-8">
     <div class="flex items-start gap-6 mb-8">
@@ -175,7 +175,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     class="w-full sm:w-auto py-2 px-4 sm:py-2.5 sm:px-6 border border-[#A3492D] bg-[#A3492D] text-white text-[12px] sm:text-[13px] tracking-[0.1em] uppercase hover:bg-[#8B3D25] hover:-translate-y-0.5 shadow-[0_6px_14px_rgba(163,73,45,0.35)] hover:shadow-[0_8px_22px_rgba(163,73,45,0.45)] transition-all">
                 Simpan Perubahan
             </button>
-            <a href="logout.php"
+            <a href="../pages/logout.php"
                class="w-full sm:w-auto text-center py-2 px-4 sm:py-2.5 sm:px-6 border border-[#D1C4B0] bg-white text-[12px] sm:text-[13px] tracking-[0.1em] uppercase text-[#A3492D] hover:bg-[#F5F0E8] hover:-translate-y-0.5 shadow-[0_4px_10px_rgba(0,0,0,0.14)] hover:shadow-[0_7px_16px_rgba(0,0,0,0.2)] transition-all no-underline">
                 Keluar
             </a>

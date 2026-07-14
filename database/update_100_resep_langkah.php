@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/koneksi.php';
+require_once __DIR__ . '/../config/koneksi.php';
 
 function langkah($judul, $steps) {
     $link = "https://www.google.com/search?q=resep+" . urlencode($judul);

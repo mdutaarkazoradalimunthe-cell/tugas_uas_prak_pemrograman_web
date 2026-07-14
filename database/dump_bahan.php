@@ -1,5 +1,5 @@
 <?php
-require 'koneksi.php';
+require __DIR__ . '/../config/koneksi.php';
 $result = mysqli_query($koneksi, "SELECT id, nama_bahan FROM bahan_makanan ORDER BY nama_bahan");
 $map = [];
 while ($row = mysqli_fetch_assoc($result)) {

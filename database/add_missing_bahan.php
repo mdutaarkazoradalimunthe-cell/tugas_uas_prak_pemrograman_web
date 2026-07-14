@@ -1,5 +1,5 @@
 <?php
-require_once 'koneksi.php';
+require_once __DIR__ . '/../config/koneksi.php';
 
 $missing = [
     ['Daun Pandan', 1, 0.1, 0.2, 0.0],
@@ -19,7 +19,6 @@ $missing = [
     ['Singkong', 160, 1.4, 38.0, 0.3],
     ['Ubi Jalar', 86, 1.6, 20.0, 0.1],
     ['Roti Tawar', 265, 8.0, 49.0, 3.0],
-    ['Tepung Ketan', 364, 2.5, 80.0, 0.5],
     ['Bakso Sapi', 200, 14.0, 8.0, 12.0],
     ['Ikan Lele Segar', 120, 18.0, 0, 5.0],
     ['Susu Cair', 61, 3.3, 4.8, 3.3],

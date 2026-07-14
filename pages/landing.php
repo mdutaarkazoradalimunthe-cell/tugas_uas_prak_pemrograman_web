@@ -4,7 +4,7 @@ if (isset($_SESSION['id_user'])) {
     header('Location: resep/index.php');
     exit;
 }
-require 'koneksi.php';
+require '../config/koneksi.php';
 
 $result = mysqli_query($koneksi, "SELECT COUNT(*) as total FROM bahan_makanan");
 $total_bahan = 0;
@@ -27,8 +27,8 @@ if ($result) {
 <nav class="sticky top-0 z-40 bg-[#FAF7F2] max-w-6xl mx-auto px-4 sm:px-6 py-4 sm:py-5 flex items-center justify-between">
     <a href="landing.php" class="block shrink-0"><img src="assets/images/logo.png" alt="Rasa dan Gizi" class="h-12 sm:h-16 w-auto"></a>
     <div class="flex items-center gap-4 md:gap-8 text-[11px] md:text-[12px] tracking-[0.15em] uppercase text-[#4A4438]">
-        <a href="register.php" class="hover:text-[#2C2620] no-underline">Daftar</a>
-        <a href="login.php" class="hover:text-[#2C2620] no-underline">Masuk</a>
+        <a href="../register.php" class="hover:text-[#2C2620] no-underline">Daftar</a>
+        <a href="../login.php" class="hover:text-[#2C2620] no-underline">Masuk</a>
     </div>
 </nav>
 
@@ -54,7 +54,7 @@ if ($result) {
             <p class="text-[14px] text-[#2C2620] leading-relaxed mb-6">
               Dari pustaka gizi hingga resep harian, temukan keseimbangan antara cita rasa dan kebutuhan nutrisi keluarga.
             </p>
-            <a href="register.php" class="py-2.5 px-5 border border-[#A3492D] bg-[#A3492D] text-white text-[13px] tracking-[0.1em] uppercase no-underline inline-block hover:bg-[#8B3D25] hover:-translate-y-0.5 shadow-[0_6px_14px_rgba(163,73,45,0.35)] hover:shadow-[0_8px_22px_rgba(163,73,45,0.45)] transition-all">
+            <a href="../register.php" class="py-2.5 px-5 border border-[#A3492D] bg-[#A3492D] text-white text-[13px] tracking-[0.1em] uppercase no-underline inline-block hover:bg-[#8B3D25] hover:-translate-y-0.5 shadow-[0_6px_14px_rgba(163,73,45,0.35)] hover:shadow-[0_8px_22px_rgba(163,73,45,0.45)] transition-all">
                 Mulai Jelajahi
             </a>
         </div>

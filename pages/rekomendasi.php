@@ -1,7 +1,7 @@
 <?php
-require_once 'cek_login.php';
-require_once 'koneksi.php';
-require_once 'fungsi_gizi.php';
+require_once '../config/cek_login.php';
+require_once '../config/koneksi.php';
+require_once '../includes/fungsi_gizi.php';
 
 $keyword = trim($_GET['cari'] ?? '');
 $results = [];
@@ -58,7 +58,7 @@ if (!empty($keyword)) {
 </head>
 <body class="bg-[#FAF7F2] text-[#2C2620] font-sans antialiased min-h-screen">
 
-<?php $base_path = ''; $active_page = 'rekomendasi'; require __DIR__ . '/partials/navbar.php'; ?>
+<?php $base_path = '../'; $active_page = 'rekomendasi'; require __DIR__ . '/../includes/partials/navbar.php'; ?>
 
 <div class="max-w-6xl mx-auto px-6 py-8">
     <div class="flex items-start gap-4 md:gap-6 mb-6 md:mb-8">
@@ -99,7 +99,7 @@ if (!empty($keyword)) {
             <div class="bg-[#E4DBC8] p-16 text-center">
                 <p class="text-[#4A4438] text-base mb-2">Tidak ada resep yang cocok dengan "<?= htmlspecialchars($keyword) ?>"</p>
                 <p class="text-[14px] text-[#4A4438] mb-5">Coba gunakan kata kunci lain atau tambah resep baru</p>
-                <a href="resep/tambah.php" class="py-2.5 px-5 border border-[#A3492D] bg-[#A3492D] text-white text-[13px] tracking-[0.1em] uppercase hover:bg-[#8B3D25] hover:-translate-y-0.5 shadow-[0_6px_14px_rgba(163,73,45,0.35)] hover:shadow-[0_8px_22px_rgba(163,73,45,0.45)] transition-all no-underline inline-block">Tambah Resep Baru</a>
+                <a href="../resep/tambah.php" class="py-2.5 px-5 border border-[#A3492D] bg-[#A3492D] text-white text-[13px] tracking-[0.1em] uppercase hover:bg-[#8B3D25] hover:-translate-y-0.5 shadow-[0_6px_14px_rgba(163,73,45,0.35)] hover:shadow-[0_8px_22px_rgba(163,73,45,0.45)] transition-all no-underline inline-block">Tambah Resep Baru</a>
             </div>
         <?php else: ?>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -148,7 +148,7 @@ if (!empty($keyword)) {
                             </div>
                         </div>
                         <div class="border-t border-[#E4DBC8] px-5 py-3">
-                            <a href="resep/gunakan.php?sumber=<?= $r['id'] ?>"
+                            <a href="../resep/gunakan.php?sumber=<?= $r['id'] ?>"
                                class="block w-full text-center py-2.5 border border-[#A3492D] bg-[#A3492D] text-white text-[13px] tracking-[0.1em] uppercase hover:bg-[#8B3D25] hover:-translate-y-0.5 shadow-[0_6px_14px_rgba(163,73,45,0.35)] hover:shadow-[0_8px_22px_rgba(163,73,45,0.45)] transition-all no-underline">
                                 Gunakan Resep Ini
                             </a>

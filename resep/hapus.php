@@ -1,6 +1,6 @@
 <?php
-require_once '../cek_login.php';
-require_once '../koneksi.php';
+require_once '../config/cek_login.php';
+require_once '../config/koneksi.php';
 
 $id_resep = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 $id_user = $_SESSION['id_user'];

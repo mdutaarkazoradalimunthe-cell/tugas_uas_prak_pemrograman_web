@@ -1,5 +1,5 @@
 <?php
-require 'koneksi.php';
+require __DIR__ . '/../config/koneksi.php';
 
 echo "=== CEK DATA ===\n";
 
