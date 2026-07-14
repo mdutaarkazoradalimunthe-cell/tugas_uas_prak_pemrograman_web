@@ -161,6 +161,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <input type="search" id="filterBahan" value=""
                    class="w-full px-3 py-2.5 bg-white border border-[#D1C4B0] text-[13px] text-[#2C2620] focus:outline-none focus:border-[#A3492D] focus:shadow-[0_0_0_2px_rgba(163,73,45,0.1)] transition-all"
                    placeholder="Ketik nama bahan... (contoh: telur, nasi, ayam)" autocomplete="off">
+            <div id="filterInfo" class="text-[12px] text-[#6B6154] mt-2 hidden"></div>
         </div>
 
         <div class="flex items-center gap-3 mb-3">
@@ -286,14 +287,27 @@ var searchTimeout;
 filterInput.addEventListener('input', function() {
     var keyword = this.value.toLowerCase().trim();
     var items = document.querySelectorAll('#checklistContainer .bahan-item');
+    var visibleCount = 0;
+    var totalCount = items.length;
     items.forEach(function(item) {
         var label = item.querySelector('label').textContent.toLowerCase();
         if (keyword === '' || label.indexOf(keyword) !== -1) {
             item.style.display = '';
+            visibleCount++;
         } else {
             item.style.display = 'none';
         }
     });
+
+    var info = document.getElementById('filterInfo');
+    if (keyword !== '') {
+        info.textContent = visibleCount + ' dari ' + totalCount + ' bahan ditemukan untuk "' + keyword + '"';
+        info.classList.remove('hidden');
+    } else {
+        info.classList.add('hidden');
+    }
+
+    scheduleSearch();
 });
 
 document.getElementById('selectAll').addEventListener('click', function() {
