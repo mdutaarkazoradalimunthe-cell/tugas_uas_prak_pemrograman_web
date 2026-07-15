@@ -122,7 +122,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gunakan Resep â€” <?= htmlspecialchars($resep_sumber['judul']) ?></title>
+    <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+    <title>Gunakan Resep — <?= htmlspecialchars($resep_sumber['judul']) ?></title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
