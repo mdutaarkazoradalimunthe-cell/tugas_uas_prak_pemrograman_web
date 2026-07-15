@@ -77,6 +77,8 @@ function get_bahan_resep($id_resep) {
             rb.id_bahan,
             bm.nama_bahan,
             rb.jumlah_gram,
+            rb.jumlah_asli,
+            rb.satuan,
             ROUND((rb.jumlah_gram / 100) * ((bm.protein_per_100g * 4) + (bm.karbohidrat_per_100g * 4) + (bm.lemak_per_100g * 9)), 2) AS kalori,
             ROUND((rb.jumlah_gram / 100) * bm.protein_per_100g, 2) AS protein,
             ROUND((rb.jumlah_gram / 100) * bm.karbohidrat_per_100g, 2) AS karbohidrat,
@@ -164,6 +166,8 @@ function get_bahan_resep_pribadi($id_resep_pribadi) {
             rb.id_bahan,
             bm.nama_bahan,
             rb.jumlah_gram,
+            rb.jumlah_asli,
+            rb.satuan,
             ROUND((rb.jumlah_gram / 100) * ((bm.protein_per_100g * 4) + (bm.karbohidrat_per_100g * 4) + (bm.lemak_per_100g * 9)), 2) AS kalori,
             ROUND((rb.jumlah_gram / 100) * bm.protein_per_100g, 2) AS protein,
             ROUND((rb.jumlah_gram / 100) * bm.karbohidrat_per_100g, 2) AS karbohidrat,
@@ -190,4 +194,30 @@ function get_bahan_resep_pribadi($id_resep_pribadi) {
 
     mysqli_stmt_close($stmt);
     return $bahan;
+}
+
+function get_satuan_list($id_bahan) {
+    global $koneksi;
+    $stmt = mysqli_prepare($koneksi, "SELECT satuan, gram_per_satuan FROM satuan_konversi WHERE id_bahan = ?");
+    mysqli_stmt_bind_param($stmt, "i", $id_bahan);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    $list = [["satuan" => "gram", "gram_per_satuan" => 1]];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $list[] = $row;
+    }
+    mysqli_stmt_close($stmt);
+    return $list;
+}
+
+function konversi_ke_gram($id_bahan, $jumlah, $satuan) {
+    if ($satuan === "gram" || empty($satuan)) return (float)$jumlah;
+    global $koneksi;
+    $stmt = mysqli_prepare($koneksi, "SELECT gram_per_satuan FROM satuan_konversi WHERE id_bahan = ? AND satuan = ?");
+    mysqli_stmt_bind_param($stmt, "is", $id_bahan, $satuan);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_bind_result($stmt, $gram);
+    $result = mysqli_stmt_fetch($stmt);
+    mysqli_stmt_close($stmt);
+    return $result ? (float)$jumlah * (float)$gram : (float)$jumlah;
 }

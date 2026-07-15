@@ -117,7 +117,7 @@ if ($resep) {
                 <thead>
                     <tr class="border-b border-[#DFD5C4] text-[12px] tracking-[0.15em] uppercase text-[#6B6154]">
                         <th class="text-left py-2.5 pr-4 font-normal">Bahan</th>
-                        <th class="text-right py-2.5 px-4 font-normal">Gram</th>
+                        <th class="text-right py-2.5 px-4 font-normal">Jumlah</th>
                         <th class="text-right py-2.5 px-4 font-normal">Kalori</th>
                         <th class="text-right py-2.5 px-4 font-normal">Protein</th>
                         <th class="text-right py-2.5 px-4 font-normal">Karbo</th>
@@ -130,7 +130,7 @@ if ($resep) {
                     ?>
                     <tr class="border-b border-[#DFD5C4] <?= $punya ? '' : '' ?>">
                         <td class="py-2.5 pr-4 <?= $punya ? 'text-[#A3492D]' : '' ?>"><?php if ($punya): ?><span class="mr-1">&checkmark;</span><?php endif; ?><?= htmlspecialchars($b['nama_bahan']) ?></td>
-                        <td class="text-right py-2.5 px-4 text-[#6B6154]"><?= $b['jumlah_gram'] ?></td>
+                        <td class="text-right py-2.5 px-4 text-[#6B6154]"><?= ($b['satuan'] && $b['jumlah_asli']) ? htmlspecialchars($b['jumlah_asli'] . ' ' . $b['satuan']) . ' (' . $b['jumlah_gram'] . ' g)' : $b['jumlah_gram'] . ' g' ?></td>
                         <td class="text-right py-2.5 px-4"><?= $b['kalori'] ?></td>
                         <td class="text-right py-2.5 px-4"><?= $b['protein'] ?></td>
                         <td class="text-right py-2.5 px-4"><?= $b['karbohidrat'] ?></td>

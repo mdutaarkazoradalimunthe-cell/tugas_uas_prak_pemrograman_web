@@ -103,15 +103,16 @@ if ($gizi) {
 $html .= '<div class="section-title">Bahan-Bahan</div>';
 $html .= '<table class="bahan">
 <thead><tr>
-    <th>Bahan</th><th class="r">Gram</th><th class="r">Kalori</th>
+    <th>Bahan</th><th class="r">Jumlah</th><th class="r">Kalori</th>
     <th class="r">Protein</th><th class="r">Karbo</th><th class="r">Lemak</th>
 </tr></thead><tbody>';
 
 if ($bahan && count($bahan) > 0) {
     foreach ($bahan as $b) {
+        $display = ($b['satuan'] && $b['jumlah_asli']) ? htmlspecialchars($b['jumlah_asli'] . ' ' . $b['satuan']) . ' (' . (int)$b['jumlah_gram'] . ' g)' : (int)$b['jumlah_gram'] . ' g';
         $html .= '<tr>
             <td>' . htmlspecialchars($b['nama_bahan']) . '</td>
-            <td class="r">' . (int) $b['jumlah_gram'] . '</td>
+            <td class="r">' . $display . '</td>
             <td class="r">' . number_format($b['kalori'], 1) . '</td>
             <td class="r">' . number_format($b['protein'], 1) . '</td>
             <td class="r">' . number_format($b['karbohidrat'], 1) . '</td>
